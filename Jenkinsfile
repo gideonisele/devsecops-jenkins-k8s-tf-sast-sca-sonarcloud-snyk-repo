@@ -30,8 +30,9 @@ pipeline {
                 snyk test --severity-threshold=high --all-projects
                 '''
             }
+	}
     }
-      post {
+    post {
         always{
             junit '**/target/surefire-reports/*.xml'                
         }
@@ -39,5 +40,4 @@ pipeline {
             echo 'Build failed due to vulnerabilities in thirdparty libraries'
         }
   }
-}
 }

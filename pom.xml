@@ -8,19 +8,22 @@
 	<version>1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<easybuggy-port>8080</easybuggy-port>
-		<!-- default properties (JDK 1.7 or earlier) -->
-		<jvm.args.perm.size>-XX:MaxPermSize=128m</jvm.args.perm.size>
-		<jvm.args.gc.log.path>-Xloggc:logs/gc.log</jvm.args.gc.log.path>
-		<jvm.args.print.heap.at.gc>-XX:+PrintHeapAtGC</jvm.args.print.heap.at.gc>
-		<jvm.args.print.gc.details>-XX:+PrintGCDetails</jvm.args.print.gc.details>
-		<jvm.args.print.gc.date.stamps>-XX:+PrintGCDateStamps</jvm.args.print.gc.date.stamps>
-		<jvm.args.gc.log.file.rotation>-XX:+UseGCLogFileRotation</jvm.args.gc.log.file.rotation>
-		<jvm.args.number.of.gc.log.files>-XX:NumberOfGCLogFiles=5</jvm.args.number.of.gc.log.files>
-		<jvm.args.gc.log.file.size>-XX:GCLogFileSize=10M</jvm.args.gc.log.file.size>
-	</properties>
+<properties>
+    <maven.compiler.source>17</maven.compiler.source> <!-- Specify the Java version -->
+    <maven.compiler.target>17</maven.compiler.target> <!-- Specify the Java version -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <easybuggy-port>8080</easybuggy-port>
+
+    <!-- JVM Arguments for Java 17 -->
+    <jvm.args.max.metaspace.size>-XX:MaxMetaspaceSize=128m</jvm.args.max.metaspace.size> <!-- Limit metaspace memory -->
+    <jvm.args.gc.log.path>-Xlog:gc*:logs/gc.log</jvm.args.gc.log.path> <!-- GC logging format updated in JDK 17 -->
+    <jvm.args.print.heap.at.gc>-XX:+PrintHeapAtGC</jvm.args.print.heap.at.gc>
+    <jvm.args.print.gc.details>-XX:+PrintGCDetails</jvm.args.print.gc.details>
+    <jvm.args.print.gc.date.stamps>-XX:+PrintGCDateStamps</jvm.args.print.gc.date.stamps>
+    <jvm.args.gc.log.file.rotation>-XX:+UseGCLogFileRotation</jvm.args.gc.log.file.rotation>
+    <jvm.args.number.of.gc.log.files>-XX:NumberOfGCLogFiles=5</jvm.args.number.of.gc.log.files>
+    <jvm.args.gc.log.file.size>-XX:GCLogFileSize=10M</jvm.args.gc.log.file.size>
+</properties>
 
 	<profiles>
 		<profile>
@@ -241,7 +244,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2</version>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>startup-uber-start</id>

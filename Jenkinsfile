@@ -21,6 +21,7 @@ pipeline {
 	    steps {
 		    sh 'mvn test'
 	    }
+    }
         stage('SCA scan') {
             steps {
                 // Run Snyk SCA scan using the stored token
@@ -29,7 +30,13 @@ pipeline {
                 snyk test --severity-threshold=high --all-projects
                 '''
             }
+    }
+      post {
+        always{
+            junit '**/target/surefire-reports/*.xml'                
         }
-    }		
+        failure {
+            echo 'Build failed due to vulnerabilities in thirdparty libraries'
+        }
   }
 }

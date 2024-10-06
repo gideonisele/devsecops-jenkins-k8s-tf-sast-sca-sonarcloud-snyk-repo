@@ -34,6 +34,7 @@ pipeline {
 			 sh 'mvn snyk:test -fn'
 				}
 			}
+                 }
         stage('SCA scan') {
             steps {
                 // Run Snyk SCA scan using the stored token
@@ -44,7 +45,6 @@ pipeline {
             }
 	}
     }
-}
     post {
         always {
             // Clean up workspace after the pipeline finishes

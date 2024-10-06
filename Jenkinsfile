@@ -44,6 +44,7 @@ pipeline {
             }
 	}
     }
+}
     post {
         always {
             // Clean up workspace after the pipeline finishes

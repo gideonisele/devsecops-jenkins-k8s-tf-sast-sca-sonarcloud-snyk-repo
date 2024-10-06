@@ -3,7 +3,8 @@ pipeline {
   tools { 
         maven 'MAVEN3'  
     }
-    stage('CompileandRunSonarAnalysis') {
+   stages {
+       stage('CompileandRunSonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=new-app-java-sast -Dsonar.organization=new-app-java-sast -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=50d6aedeb92bc2f370ce794a7a60580bede0ea99'
 			}
@@ -17,3 +18,4 @@ pipeline {
 			}
     }		
   }
+}

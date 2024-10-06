@@ -12,6 +12,12 @@ pipeline {
 		    git branch: 'main', url: 'https://github.com/gideonisele/devsecops-jenkins-k8s-tf-sast-sca-sonarcloud-snyk-repo.git'
 	    }
     }
+    stage('Build') {
+            steps {
+                // Build the Java application
+                sh 'mvn install'
+            }
+        }
     stage('Test') {
 	    steps {
 		    sh 'mvn test'
@@ -28,8 +34,9 @@ pipeline {
 	}
     }
     post {
-        always{
-            junit '**/target/surefire-reports/*.xml'                
+        always {
+            // Clean up workspace after the pipeline finishes
+            cleanWs()
         }
         failure {
             echo 'Build failed due to vulnerabilities in thirdparty libraries'

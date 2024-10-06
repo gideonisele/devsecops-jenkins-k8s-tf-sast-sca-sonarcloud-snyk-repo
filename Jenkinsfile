@@ -12,11 +12,6 @@ pipeline {
 		    git branch: 'main', url: 'https://github.com/gideonisele/devsecops-jenkins-k8s-tf-sast-sca-sonarcloud-snyk-repo.git'
 	    }
     }
-    stage('Build') {
-	    steps {
-		    sh 'mvn install'
-	    }
-    }
     stage('Test') {
 	    steps {
 		    sh 'mvn test'

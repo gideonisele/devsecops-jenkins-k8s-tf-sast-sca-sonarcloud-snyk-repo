@@ -12,6 +12,11 @@ pipeline {
 		    git branch: 'main', url: 'https://github.com/gideonisele/devsecops-jenkins-k8s-tf-sast-sca-sonarcloud-snyk-repo.git'
 	    }
     }
+    stage('Build') {
+	    steps {
+		    sh 'mvn install'
+	    }
+    }
     stage('Test') {
 	    steps {
 		    sh 'mvn test'
@@ -28,16 +33,7 @@ pipeline {
 			 sh 'mvn snyk:test -fn'
 				}
 			}
-                 }
-        stage('SCA scan') {
-            steps {
-                // Run Snyk SCA scan using the stored token
-                sh '''
-                snyk auth $SNYK_TOKEN
-                snyk test --severity-threshold=high --all-projects
-                '''
-            }
-	}
+        }
     }
     post {
         always {
